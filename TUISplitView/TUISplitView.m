@@ -5,8 +5,6 @@
 @property (nonatomic) NSInteger numberOfSplitViews;
 @property (nonatomic, strong) NSMutableArray *splitViews;
 @property (nonatomic, strong) NSMutableArray *dividers;
-@property (nonatomic, assign) BOOL restoredFromState;
-
 
 @property (nonatomic, assign) NSPoint initialDragLocation;
 @property (nonatomic, assign) NSPoint initialDividerLocation;
@@ -97,9 +95,8 @@
             // or if properties have changed, like height, div width
             TUIView *div = (TUIView *)obj;
             CGRect f = div.frame;
-            if ((f.size.height != self.frame.size.height
-                || f.size.width != self.dividerWidth)
-                && !self.restoredFromState) {
+            if (f.size.height != self.frame.size.height
+                 || f.size.width != self.dividerWidth) {
                 [div setFrame:[self frameForDividerAtIndex:idx]];
             }
             [self bringSubviewToFront:div];
@@ -221,7 +218,6 @@
         TUIView *divider = [self.dividers objectAtIndex:i];
         divider.frame = frame;
     }
-    self.restoredFromState = YES;
     return YES;
 }
 
