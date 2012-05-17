@@ -1,0 +1,413 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB05E6D71561CC2A007FE920 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E6D61561CC2A007FE920 /* Cocoa.framework */; };
+		AB05E6E11561CC2A007FE920 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB05E6DF1561CC2A007FE920 /* InfoPlist.strings */; };
+		AB05E6E31561CC2A007FE920 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB05E6E21561CC2A007FE920 /* main.m */; };
+		AB05E6E71561CC2A007FE920 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AB05E6E51561CC2A007FE920 /* Credits.rtf */; };
+		AB05E6EA1561CC2A007FE920 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB05E6E91561CC2A007FE920 /* AppDelegate.m */; };
+		AB05E6ED1561CC2B007FE920 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB05E6EB1561CC2B007FE920 /* MainMenu.xib */; };
+		AB05E6FE1561CD65007FE920 /* TUISplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB05E6FB1561CD65007FE920 /* TUISplitView.m */; };
+		AB05E7121561CFFC007FE920 /* TwUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E70B1561CFE8007FE920 /* TwUI.framework */; };
+		AB05E7141561D09F007FE920 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E7131561D09F007FE920 /* ApplicationServices.framework */; };
+		AB05E7161561D0A4007FE920 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E7151561D0A4007FE920 /* QuartzCore.framework */; };
+		ABCABCE41562196500B2BD41 /* NSMutableArray+Insert.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCABCE31562196500B2BD41 /* NSMutableArray+Insert.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AB05E70A1561CFE8007FE920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CB5B264C13BE6DA200579B1E;
+			remoteInfo = TwUI;
+		};
+		AB05E70C1561CFE8007FE920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CB5E321813BE7098004B7899;
+			remoteInfo = "Dynamic Library";
+		};
+		AB05E70E1561CFE8007FE920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5EE983B713BE7809005F430D;
+			remoteInfo = "Static Library";
+		};
+		AB05E7101561CFE8007FE920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CB5B266113BE6DA300579B1E;
+			remoteInfo = Tests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AB05E6D21561CC2A007FE920 /* TUISplitViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TUISplitViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB05E6D61561CC2A007FE920 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		AB05E6D91561CC2A007FE920 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		AB05E6DA1561CC2A007FE920 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AB05E6DB1561CC2A007FE920 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AB05E6DE1561CC2A007FE920 /* TUISplitViewDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TUISplitViewDemo-Info.plist"; sourceTree = "<group>"; };
+		AB05E6E01561CC2A007FE920 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AB05E6E21561CC2A007FE920 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AB05E6E41561CC2A007FE920 /* TUISplitViewDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TUISplitViewDemo-Prefix.pch"; sourceTree = "<group>"; };
+		AB05E6E61561CC2A007FE920 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		AB05E6E81561CC2A007FE920 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AB05E6E91561CC2A007FE920 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AB05E6EC1561CC2B007FE920 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		AB05E6FA1561CD65007FE920 /* TUISplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUISplitView.h; sourceTree = "<group>"; };
+		AB05E6FB1561CD65007FE920 /* TUISplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUISplitView.m; sourceTree = "<group>"; };
+		AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TwUI.xcodeproj; path = ../../twui/TwUI.xcodeproj; sourceTree = "<group>"; };
+		AB05E7131561D09F007FE920 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		AB05E7151561D0A4007FE920 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		ABCABCE21562196500B2BD41 /* NSMutableArray+Insert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Insert.h"; sourceTree = "<group>"; };
+		ABCABCE31562196500B2BD41 /* NSMutableArray+Insert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Insert.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB05E6CF1561CC2A007FE920 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB05E7161561D0A4007FE920 /* QuartzCore.framework in Frameworks */,
+				AB05E7141561D09F007FE920 /* ApplicationServices.framework in Frameworks */,
+				AB05E7121561CFFC007FE920 /* TwUI.framework in Frameworks */,
+				AB05E6D71561CC2A007FE920 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB05E6C71561CC2A007FE920 = {
+			isa = PBXGroup;
+			children = (
+				AB05E6DC1561CC2A007FE920 /* TUISplitViewDemo */,
+				AB05E6D51561CC2A007FE920 /* Frameworks */,
+				AB05E6D31561CC2A007FE920 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AB05E6D31561CC2A007FE920 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB05E6D21561CC2A007FE920 /* TUISplitViewDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB05E6D51561CC2A007FE920 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB05E7151561D0A4007FE920 /* QuartzCore.framework */,
+				AB05E7131561D09F007FE920 /* ApplicationServices.framework */,
+				AB05E6D61561CC2A007FE920 /* Cocoa.framework */,
+				AB05E6D81561CC2A007FE920 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB05E6D81561CC2A007FE920 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB05E6D91561CC2A007FE920 /* AppKit.framework */,
+				AB05E6DA1561CC2A007FE920 /* CoreData.framework */,
+				AB05E6DB1561CC2A007FE920 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		AB05E6DC1561CC2A007FE920 /* TUISplitViewDemo */ = {
+			isa = PBXGroup;
+			children = (
+				AB05E6E81561CC2A007FE920 /* AppDelegate.h */,
+				AB05E6E91561CC2A007FE920 /* AppDelegate.m */,
+				AB05E6EB1561CC2B007FE920 /* MainMenu.xib */,
+				AB05E6F71561CD65007FE920 /* TUISplitView */,
+				AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */,
+				AB05E6DD1561CC2A007FE920 /* Supporting Files */,
+			);
+			path = TUISplitViewDemo;
+			sourceTree = "<group>";
+		};
+		AB05E6DD1561CC2A007FE920 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AB05E6DE1561CC2A007FE920 /* TUISplitViewDemo-Info.plist */,
+				AB05E6DF1561CC2A007FE920 /* InfoPlist.strings */,
+				AB05E6E21561CC2A007FE920 /* main.m */,
+				AB05E6E41561CC2A007FE920 /* TUISplitViewDemo-Prefix.pch */,
+				AB05E6E51561CC2A007FE920 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AB05E6F71561CD65007FE920 /* TUISplitView */ = {
+			isa = PBXGroup;
+			children = (
+				AB05E6FA1561CD65007FE920 /* TUISplitView.h */,
+				AB05E6FB1561CD65007FE920 /* TUISplitView.m */,
+				ABCABCE21562196500B2BD41 /* NSMutableArray+Insert.h */,
+				ABCABCE31562196500B2BD41 /* NSMutableArray+Insert.m */,
+			);
+			name = TUISplitView;
+			path = ../../TUISplitView;
+			sourceTree = "<group>";
+		};
+		AB05E7011561CFE8007FE920 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB05E70B1561CFE8007FE920 /* TwUI.framework */,
+				AB05E70D1561CFE8007FE920 /* libtwui.dylib */,
+				AB05E70F1561CFE8007FE920 /* libtwui.a */,
+				AB05E7111561CFE8007FE920 /* Tests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB05E6D11561CC2A007FE920 /* TUISplitViewDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB05E6F01561CC2B007FE920 /* Build configuration list for PBXNativeTarget "TUISplitViewDemo" */;
+			buildPhases = (
+				AB05E6CE1561CC2A007FE920 /* Sources */,
+				AB05E6CF1561CC2A007FE920 /* Frameworks */,
+				AB05E6D01561CC2A007FE920 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TUISplitViewDemo;
+			productName = TUISplitViewDemo;
+			productReference = AB05E6D21561CC2A007FE920 /* TUISplitViewDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB05E6C91561CC2A007FE920 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = Jonathan;
+			};
+			buildConfigurationList = AB05E6CC1561CC2A007FE920 /* Build configuration list for PBXProject "TUISplitViewDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AB05E6C71561CC2A007FE920;
+			productRefGroup = AB05E6D31561CC2A007FE920 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = AB05E7011561CFE8007FE920 /* Products */;
+					ProjectRef = AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				AB05E6D11561CC2A007FE920 /* TUISplitViewDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		AB05E70B1561CFE8007FE920 /* TwUI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TwUI.framework;
+			remoteRef = AB05E70A1561CFE8007FE920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AB05E70D1561CFE8007FE920 /* libtwui.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libtwui.dylib;
+			remoteRef = AB05E70C1561CFE8007FE920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AB05E70F1561CFE8007FE920 /* libtwui.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libtwui.a;
+			remoteRef = AB05E70E1561CFE8007FE920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AB05E7111561CFE8007FE920 /* Tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Tests.octest;
+			remoteRef = AB05E7101561CFE8007FE920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AB05E6D01561CC2A007FE920 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB05E6E11561CC2A007FE920 /* InfoPlist.strings in Resources */,
+				AB05E6E71561CC2A007FE920 /* Credits.rtf in Resources */,
+				AB05E6ED1561CC2B007FE920 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB05E6CE1561CC2A007FE920 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB05E6E31561CC2A007FE920 /* main.m in Sources */,
+				AB05E6EA1561CC2A007FE920 /* AppDelegate.m in Sources */,
+				AB05E6FE1561CD65007FE920 /* TUISplitView.m in Sources */,
+				ABCABCE41562196500B2BD41 /* NSMutableArray+Insert.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AB05E6DF1561CC2A007FE920 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB05E6E01561CC2A007FE920 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AB05E6E51561CC2A007FE920 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB05E6E61561CC2A007FE920 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		AB05E6EB1561CC2B007FE920 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB05E6EC1561CC2B007FE920 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AB05E6EE1561CC2B007FE920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AB05E6EF1561CC2B007FE920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AB05E6F11561CC2B007FE920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TUISplitViewDemo/TUISplitViewDemo-Prefix.pch";
+				INFOPLIST_FILE = "TUISplitViewDemo/TUISplitViewDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AB05E6F21561CC2B007FE920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TUISplitViewDemo/TUISplitViewDemo-Prefix.pch";
+				INFOPLIST_FILE = "TUISplitViewDemo/TUISplitViewDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB05E6CC1561CC2A007FE920 /* Build configuration list for PBXProject "TUISplitViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB05E6EE1561CC2B007FE920 /* Debug */,
+				AB05E6EF1561CC2B007FE920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB05E6F01561CC2B007FE920 /* Build configuration list for PBXNativeTarget "TUISplitViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB05E6F11561CC2B007FE920 /* Debug */,
+				AB05E6F21561CC2B007FE920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB05E6C91561CC2A007FE920 /* Project object */;
+}
