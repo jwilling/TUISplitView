@@ -6,21 +6,28 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     TUINSView *view = self.window.contentView;
-    
-    TUISplitView *splitView = [[TUISplitView alloc] initWithFrame:view.frame splitViews:2];
-    view.rootView = splitView;
     view.autoresizingMask = TUIViewAutoresizingFlexibleSize;
+    
+    //TUISplitView *splitView = [[TUISplitView alloc] initWithFrame:view.frame splitViews:2];
+    TUISplitView *splitView = [[TUISplitView alloc] initWithFrame:view.frame];
+    splitView.horizontal = NO;
+    view.rootView = splitView;
     
     TUIView *view1 = [[TUIView alloc] initWithFrame:CGRectZero];
     view1.backgroundColor = [TUIColor redColor];
+#warning horizontal resizing might be off
     
     TUIView *view2 = [[TUIView alloc] initWithFrame:CGRectZero];
     view2.backgroundColor = [TUIColor blueColor];
     
-    [splitView setView:view1 forSplitView:0];
-    [splitView setView:view2 forSplitView:1];
-
-    splitView.dividerWidth = 9.f;
+    TUIView *view3 = [[TUIView alloc] initWithFrame:CGRectZero];
+    view3.backgroundColor = [TUIColor magentaColor];
+    
+    [splitView addSplitView:view1];
+    [splitView addSplitView:view2];
+    [splitView addSplitView:view3];
+    
+    splitView.dividerThickness = 4.f;
     splitView.dividerDrawRectBlock = ^(TUIView *divider, CGRect rect) {
         CGRect bounds = divider.bounds;
         CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
@@ -94,7 +101,7 @@
         [lightColor set];
         CGContextFillRect(context, gripRect);
     };
-    [self restoreState];
+    //[self restoreState];
 }
 
 - (TUISplitView *)splitView {
@@ -110,7 +117,7 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
-    [self saveState];
+    //[self saveState];
 }
 
 

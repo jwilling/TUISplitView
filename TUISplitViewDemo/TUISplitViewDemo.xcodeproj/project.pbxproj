@@ -14,37 +14,36 @@
 		AB05E6EA1561CC2A007FE920 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB05E6E91561CC2A007FE920 /* AppDelegate.m */; };
 		AB05E6ED1561CC2B007FE920 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB05E6EB1561CC2B007FE920 /* MainMenu.xib */; };
 		AB05E6FE1561CD65007FE920 /* TUISplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB05E6FB1561CD65007FE920 /* TUISplitView.m */; };
-		AB05E7121561CFFC007FE920 /* TwUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E70B1561CFE8007FE920 /* TwUI.framework */; };
 		AB05E7141561D09F007FE920 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E7131561D09F007FE920 /* ApplicationServices.framework */; };
 		AB05E7161561D0A4007FE920 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E7151561D0A4007FE920 /* QuartzCore.framework */; };
-		ABCABCE41562196500B2BD41 /* NSMutableArray+Insert.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCABCE31562196500B2BD41 /* NSMutableArray+Insert.m */; };
+		AB3306841589A5BC00BC74F5 /* TwUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB33067D1589A59A00BC74F5 /* TwUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AB05E70A1561CFE8007FE920 /* PBXContainerItemProxy */ = {
+		AB33067C1589A59A00BC74F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */;
+			containerPortal = AB3306721589A59900BC74F5 /* TwUI.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CB5B264C13BE6DA200579B1E;
 			remoteInfo = TwUI;
 		};
-		AB05E70C1561CFE8007FE920 /* PBXContainerItemProxy */ = {
+		AB33067E1589A59A00BC74F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */;
+			containerPortal = AB3306721589A59900BC74F5 /* TwUI.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CB5E321813BE7098004B7899;
 			remoteInfo = "Dynamic Library";
 		};
-		AB05E70E1561CFE8007FE920 /* PBXContainerItemProxy */ = {
+		AB3306801589A59A00BC74F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */;
+			containerPortal = AB3306721589A59900BC74F5 /* TwUI.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5EE983B713BE7809005F430D;
 			remoteInfo = "Static Library";
 		};
-		AB05E7101561CFE8007FE920 /* PBXContainerItemProxy */ = {
+		AB3306821589A59A00BC74F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */;
+			containerPortal = AB3306721589A59900BC74F5 /* TwUI.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CB5B266113BE6DA300579B1E;
 			remoteInfo = Tests;
@@ -67,11 +66,9 @@
 		AB05E6EC1561CC2B007FE920 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		AB05E6FA1561CD65007FE920 /* TUISplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUISplitView.h; sourceTree = "<group>"; };
 		AB05E6FB1561CD65007FE920 /* TUISplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUISplitView.m; sourceTree = "<group>"; };
-		AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TwUI.xcodeproj; path = ../../twui/TwUI.xcodeproj; sourceTree = "<group>"; };
 		AB05E7131561D09F007FE920 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		AB05E7151561D0A4007FE920 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		ABCABCE21562196500B2BD41 /* NSMutableArray+Insert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Insert.h"; sourceTree = "<group>"; };
-		ABCABCE31562196500B2BD41 /* NSMutableArray+Insert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Insert.m"; sourceTree = "<group>"; };
+		AB3306721589A59900BC74F5 /* TwUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TwUI.xcodeproj; path = ../../externals/twui/TwUI.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +78,7 @@
 			files = (
 				AB05E7161561D0A4007FE920 /* QuartzCore.framework in Frameworks */,
 				AB05E7141561D09F007FE920 /* ApplicationServices.framework in Frameworks */,
-				AB05E7121561CFFC007FE920 /* TwUI.framework in Frameworks */,
+				AB3306841589A5BC00BC74F5 /* TwUI.framework in Frameworks */,
 				AB05E6D71561CC2A007FE920 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,8 +131,8 @@
 				AB05E6E91561CC2A007FE920 /* AppDelegate.m */,
 				AB05E6EB1561CC2B007FE920 /* MainMenu.xib */,
 				AB05E6F71561CD65007FE920 /* TUISplitView */,
-				AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */,
 				AB05E6DD1561CC2A007FE920 /* Supporting Files */,
+				AB3306721589A59900BC74F5 /* TwUI.xcodeproj */,
 			);
 			path = TUISplitViewDemo;
 			sourceTree = "<group>";
@@ -157,20 +154,18 @@
 			children = (
 				AB05E6FA1561CD65007FE920 /* TUISplitView.h */,
 				AB05E6FB1561CD65007FE920 /* TUISplitView.m */,
-				ABCABCE21562196500B2BD41 /* NSMutableArray+Insert.h */,
-				ABCABCE31562196500B2BD41 /* NSMutableArray+Insert.m */,
 			);
 			name = TUISplitView;
 			path = ../../TUISplitView;
 			sourceTree = "<group>";
 		};
-		AB05E7011561CFE8007FE920 /* Products */ = {
+		AB3306731589A59900BC74F5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AB05E70B1561CFE8007FE920 /* TwUI.framework */,
-				AB05E70D1561CFE8007FE920 /* libtwui.dylib */,
-				AB05E70F1561CFE8007FE920 /* libtwui.a */,
-				AB05E7111561CFE8007FE920 /* Tests.octest */,
+				AB33067D1589A59A00BC74F5 /* TwUI.framework */,
+				AB33067F1589A59A00BC74F5 /* libtwui.dylib */,
+				AB3306811589A59A00BC74F5 /* libtwui.a */,
+				AB3306831589A59A00BC74F5 /* Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,8 +211,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = AB05E7011561CFE8007FE920 /* Products */;
-					ProjectRef = AB05E7001561CFE8007FE920 /* TwUI.xcodeproj */;
+					ProductGroup = AB3306731589A59900BC74F5 /* Products */;
+					ProjectRef = AB3306721589A59900BC74F5 /* TwUI.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -228,32 +223,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		AB05E70B1561CFE8007FE920 /* TwUI.framework */ = {
+		AB33067D1589A59A00BC74F5 /* TwUI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = TwUI.framework;
-			remoteRef = AB05E70A1561CFE8007FE920 /* PBXContainerItemProxy */;
+			remoteRef = AB33067C1589A59A00BC74F5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB05E70D1561CFE8007FE920 /* libtwui.dylib */ = {
+		AB33067F1589A59A00BC74F5 /* libtwui.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
 			path = libtwui.dylib;
-			remoteRef = AB05E70C1561CFE8007FE920 /* PBXContainerItemProxy */;
+			remoteRef = AB33067E1589A59A00BC74F5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB05E70F1561CFE8007FE920 /* libtwui.a */ = {
+		AB3306811589A59A00BC74F5 /* libtwui.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libtwui.a;
-			remoteRef = AB05E70E1561CFE8007FE920 /* PBXContainerItemProxy */;
+			remoteRef = AB3306801589A59A00BC74F5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB05E7111561CFE8007FE920 /* Tests.octest */ = {
+		AB3306831589A59A00BC74F5 /* Tests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = Tests.octest;
-			remoteRef = AB05E7101561CFE8007FE920 /* PBXContainerItemProxy */;
+			remoteRef = AB3306821589A59A00BC74F5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -279,7 +274,6 @@
 				AB05E6E31561CC2A007FE920 /* main.m in Sources */,
 				AB05E6EA1561CC2A007FE920 /* AppDelegate.m in Sources */,
 				AB05E6FE1561CD65007FE920 /* TUISplitView.m in Sources */,
-				ABCABCE41562196500B2BD41 /* NSMutableArray+Insert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

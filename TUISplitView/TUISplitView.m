@@ -1,179 +1,132 @@
 #import "TUISplitView.h"
-#import "NSMutableArray+Insert.h"
+
+#define INITIAL_DRAG_LOCATION @"initialDragLocation"
+#define CURRENT_DIVIDER @"currentDivider"
+#define INITIAL_DIVIDER_ORIGIN @"initialDividerOrigin"
+#define FIRST_SPLITVIEW_FRAME @"firstSplitViewFrame"
+#define SECOND_SPLITVEIW_FRAME @"secondSplitViewFrame"
 
 @interface TUISplitView()
-@property (nonatomic) NSInteger numberOfSplitViews;
 @property (nonatomic, strong) NSMutableArray *splitViews;
 @property (nonatomic, strong) NSMutableArray *dividers;
 
-@property (nonatomic, assign) NSPoint initialDragLocation;
-@property (nonatomic, assign) NSPoint initialDividerLocation;
-@property (nonatomic, weak) TUIView *currentlyDraggingDivider;
-
+@property (nonatomic, strong) NSDictionary *draggingInfo;
 
 @end
 
 
 @implementation TUISplitView
 
-- (id)initWithFrame:(CGRect)frame splitViews:(NSUInteger)numSplits {
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (!self)
         return nil;
     
-    self.numberOfSplitViews = numSplits;
-    self.backgroundColor = [TUIColor greenColor];
+    self.backgroundColor = [TUIColor grayColor];
     self.splitViews = [NSMutableArray array];
     self.dividers = [NSMutableArray array];
-    self.dividerWidth = 4.f;
-    
+    self.dividerThickness = 4.f;
+    self.horizontal = NO;
+
     return self;
 }
 
-- (void)setView:(TUIView *)view forSplitView:(NSUInteger)splitView {
-    [self.splitViews safelyInsertObject:view atIndex:splitView];
+- (void)addSplitView:(TUIView *)view {
+    [self.splitViews addObject:view];
     [self addSubview:view];
     
-    while ( (self.numberOfSplitViews - 1) > self.dividers.count) {
-        TUIView *divider = [[TUIView alloc] initWithFrame:CGRectZero];
-        divider.backgroundColor = [TUIColor grayColor];
-        [self.dividers safelyInsertObject:divider atIndex:splitView];
-        [self addSubview:divider];
-        [self bringSubviewToFront:divider];
+    if (self.splitViews.count < 1)
+        return;
+    
+    TUIView *divider = [[TUIView alloc] initWithFrame:CGRectZero];
+    [self.dividers addObject:divider];
+    divider.backgroundColor = [TUIColor grayColor];
+    [self addSubview:divider];
+    [self bringSubviewToFront:divider];
+    
+    [self resetSubviews];
+}
+
+- (void)setHorizontal:(BOOL)isHorizontal {
+    _horizontal = isHorizontal;
+    [self resetSubviews];
+}
+
+- (void)setDividerThickness:(CGFloat)dividerThickness {
+    _dividerThickness = dividerThickness;
+    [self resetSubviews];
+}
+
+- (void)layoutSubviews {
+    for (TUIView *divider in self.dividers) {
+        CGSize size = self.bounds.size;
+        
+        CGRect newFrame = divider.frame;
+        newFrame.size.height = self.isHorizontal ? self.dividerThickness : size.height;
+        newFrame.size.width = self.isHorizontal ? size.width : self.dividerThickness;
+        divider.frame = newFrame;
+    }
+    
+    for (TUIView *splitView in self.splitViews) {
+        CGSize size = self.bounds.size;
+        
+        CGRect newFrame = splitView.frame;
+        newFrame.size.height = self.isHorizontal ? splitView.frame.size.width : size.height;
+        newFrame.size.width = self.isHorizontal ? size.width : splitView.frame.size.width;
+        splitView.frame = newFrame;
     }
 }
 
-- (CGRect)frameForSplitViewAtIndex:(NSUInteger)index {
-    CGRect frame = self.frame;
+- (void)resetSubviews {
+    CGSize size = self.bounds.size;
+    CGFloat totalDividerThickness = self.dividerThickness * self.dividers.count;
+    CGFloat adjustedDistance = (self.isHorizontal ? size.height : size.width) - totalDividerThickness;
+    CGFloat splitViewDistance = floorf(adjustedDistance / self.splitViews.count);
+    CGFloat origin = 0.f;
     
-    BOOL lastSplitView = (index == (self.splitViews.count - 1));
-    BOOL firstSplitView = (index == 0);
+    TUIView *lastSplitView = [self.splitViews lastObject];
     
-    TUIView *nextDivider = nil;
-    TUIView *previousDivider = nil;
-    if (!lastSplitView)
-        nextDivider = [self.dividers objectAtIndex:index];
-    if (!firstSplitView)
-        previousDivider = [self.dividers objectAtIndex:(index - 1)];
-
-    CGFloat newOriginX = 0.f;
-    CGFloat newWidth = 0.f;
-    if (firstSplitView) {
-        newWidth = nextDivider.frame.origin.x;
+    for (TUIView *splitView in self.splitViews) {
+        CGRect frame = self.bounds;
+        
+        if (self.isHorizontal) {
+            frame.size.height = splitViewDistance;
+            frame.origin.y = origin;
+        }
+        else {
+            frame.size.width = splitViewDistance;
+            frame.origin.x = origin;
+        }
+        
+        splitView.frame = frame;
+        
+        if ([splitView isEqual:lastSplitView]) {
+            CGRect newFrame = lastSplitView.frame;
+            newFrame.size.width = self.isHorizontal ? newFrame.size.width : size.width - origin;
+            newFrame.size.height = self.isHorizontal ? newFrame.size.height + origin : size.height;
+            splitView.frame = newFrame;
+        }
+        origin += splitViewDistance + self.dividerThickness;
+        
+        //NSLog(@"%lu - %@",self.splitViews.count,NSStringFromRect(splitView.frame));
     }
-    else if (lastSplitView) {
-        newOriginX = previousDivider.frame.origin.x + self.dividerWidth;
-        newWidth = self.frame.size.width - newOriginX;
-    }
-    else {
-        newOriginX = previousDivider.frame.origin.x + self.dividerWidth;
-        newWidth = nextDivider.frame.origin.x - newOriginX;
-    }
-    frame.origin.x = newOriginX;
-    frame.size.width = newWidth;
-    
-    return frame;
+    [self updateDividerPosition];
 }
 
-- (CGRect)frameForDividerAtIndex:(NSUInteger)index {
-    CGFloat viewWidth = self.frame.size.width;
-    CGFloat totalDividerWidth = self.dividerWidth*self.dividers.count;
-    CGFloat splitViewWidth = ceil( (viewWidth - totalDividerWidth) / self.numberOfSplitViews );
-    
-    TUIView *divider = (TUIView *)[self.dividers objectAtIndex:index];
-    if (self.dividerWidth == divider.frame.size.width) //no need to update anything other than height
-        return (CGRect){ divider.frame.origin, self.dividerWidth, self.frame.size.height };
-    
-    return CGRectMake(splitViewWidth*(index + 1), 0, self.dividerWidth, self.frame.size.height);
-}
-
-
-- (void)layoutSubviews {    
+- (void)updateDividerPosition {
     [self.dividers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ([obj isMemberOfClass:[TUIView class]]) {
-            // only set the frame if our divider isn't set up yet
-            // or if properties have changed, like height, div width
-            TUIView *div = (TUIView *)obj;
-            CGRect f = div.frame;
-            if (f.size.height != self.frame.size.height
-                 || f.size.width != self.dividerWidth) {
-                [div setFrame:[self frameForDividerAtIndex:idx]];
-            }
-            [self bringSubviewToFront:div];
-        }
-    }];
-    
-    [self.splitViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ([obj isMemberOfClass:[TUIView class]]) {
-            [(TUIView *)obj setFrame:[self frameForSplitViewAtIndex:idx]];
-        }
+        [(TUIView *)obj setFrame:[self rectForDividerAtIndex:idx]];
     }];
 }
 
 
-
-
-- (void)mouseEntered:(NSEvent *)event onSubview:(TUIView *)subview {
-    if (![self.dividers containsObject:subview])
-        return;
-        
-    [[NSCursor resizeLeftRightCursor] push];
-}
-
-- (void)mouseExited:(NSEvent *)event fromSubview:(TUIView *)subview {
-    if (![self.dividers containsObject:subview])
-        return;
-        
-    [[NSCursor currentCursor] pop];
-}
-
-- (void)mouseDown:(NSEvent *)event onSubview:(TUIView *)subview {
-    if (![self.dividers containsObject:subview])
-       return;
-    
-    self.initialDragLocation = [event locationInWindow];
-    self.currentlyDraggingDivider = subview;
-    self.initialDividerLocation = subview.frame.origin;
-}
-
-- (void)mouseUp:(NSEvent *)event fromSubview:(TUIView *)subview {
-    self.currentlyDraggingDivider = nil;
-    
-    if (![self.dividers containsObject:subview])
-        return;
-    
-    if ([event clickCount] > 1)[self collapseDivider:subview];
-}
-
--(void)mouseDragged:(NSEvent *)theEvent onSubview:(TUIView *)subview {
-    if (subview != self.currentlyDraggingDivider)
-        return;
-    
-    CGFloat deltaY = 0;
-    CGFloat deltaX = ceil([theEvent locationInWindow].x - self.initialDragLocation.x);
-    CGPoint point = self.initialDividerLocation;
-    
-    point.y += deltaY;
-    point.x += deltaX;
-    
-    if (point.x < 0.f)
-        point.x = 0.f;
-    else if (point.x > self.frame.size.width - self.dividerWidth)
-        point.x = self.frame.size.width - self.dividerWidth;
-    
-    CGSize currentSize = self.currentlyDraggingDivider.frame.size;
-    CGRect newRect = (CGRect){ point, currentSize };
-    self.currentlyDraggingDivider.frame = newRect;
-    
-    [self layoutSubviews];
-}
-
-
-- (void)collapseDivider:(TUIView *)divider {
-    [TUIView animateWithDuration:0.6f animations:^{
-        divider.frame = (CGRect){ CGPointZero, divider.frame.size };
-        [self layoutSubviews];
-    }]; 
+- (CGRect)rectForDividerAtIndex:(NSUInteger)idx {
+    CGRect newFrame = [(TUIView *)[self.splitViews objectAtIndex:idx] frame];
+    newFrame.origin.x += self.isHorizontal ? 0.f : newFrame.size.width;
+    newFrame.origin.y += self.isHorizontal ? newFrame.size.height : 0.f;
+    newFrame.size.width = self.isHorizontal ? newFrame.size.width : self.dividerThickness;
+    newFrame.size.height = self.isHorizontal ? self.dividerThickness : newFrame.size.height;
+    return newFrame;
 }
 
 
@@ -190,36 +143,92 @@
 }
 
 
-- (NSString *)stringForState {
-    NSString *numberOfDividers = [NSString stringWithFormat:@"%ld:",self.dividers.count];
-    NSString *origins = [NSString string];
-    
-    for (TUIView *divider in self.dividers) {
-        origins = [origins stringByAppendingFormat:@"%f-",divider.frame.origin.x];
-    }
-    
-    return [numberOfDividers stringByAppendingString:origins];
+
+
+- (void)mouseEntered:(NSEvent *)event onSubview:(TUIView *)subview {
+    if ([self.dividers containsObject:subview])
+        [[NSCursor resizeLeftRightCursor] push];
 }
 
-- (BOOL)setStateForString:(NSString *)stateString {
-    NSArray *strings = [stateString componentsSeparatedByString:@":"];
-    NSInteger count = strings.count;
-    if (count < 2)
-        return NO;
-    
-    NSInteger numberOfDividers = [[strings objectAtIndex:0] integerValue];
-    NSString *dividerString = [strings objectAtIndex:1];
-    NSArray *dividersArray = [dividerString componentsSeparatedByString:@"-"];
-    
-    NSInteger i;
-    for (i = 0; i < numberOfDividers; i++) {
-        CGFloat origin = [[dividersArray objectAtIndex:i] floatValue];
-        CGRect frame = (CGRect){ origin, 0, self.dividerWidth, self.frame.size.height };
-        TUIView *divider = [self.dividers objectAtIndex:i];
-        divider.frame = frame;
-    }
-    return YES;
+- (void)mouseExited:(NSEvent *)event fromSubview:(TUIView *)subview {
+    if ([self.dividers containsObject:subview])
+        [[NSCursor currentCursor] pop]; 
 }
+
+- (void)mouseDown:(NSEvent *)event onSubview:(TUIView *)subview {
+    if (![self.dividers containsObject:subview])
+        return;
+    
+    NSUInteger dividerIndex = [self.dividers indexOfObject:subview];
+    TUIView *splitViewOne = [self.splitViews objectAtIndex:dividerIndex];
+    TUIView *splitViewTwo = [self.splitViews objectAtIndex:dividerIndex + 1];
+    
+    self.draggingInfo = [NSDictionary dictionaryWithObjectsAndKeys:subview, CURRENT_DIVIDER,
+                         [NSValue valueWithPoint:[event locationInWindow]], INITIAL_DRAG_LOCATION,
+                         [NSValue valueWithPoint:subview.frame.origin], INITIAL_DIVIDER_ORIGIN,
+                         [NSValue valueWithRect:splitViewOne.frame], FIRST_SPLITVIEW_FRAME,
+                         [NSValue valueWithRect:splitViewTwo.frame], SECOND_SPLITVEIW_FRAME, nil];
+    NSLog(@"Set the dragging info");
+}
+
+- (void)mouseUp:(NSEvent *)event fromSubview:(TUIView *)subview {
+    self.draggingInfo = nil;
+    
+    if (![self.dividers containsObject:subview])
+        return;
+    
+    //if ([event clickCount] > 1)[self collapseDivider:subview];
+}
+
+-(void)mouseDragged:(NSEvent *)theEvent onSubview:(TUIView *)subview {
+    if (![subview isEqual:[self.draggingInfo valueForKey:CURRENT_DIVIDER]])
+        return;
+    
+    CGPoint initialDragLocation = NSPointToCGPoint([(NSValue *)[self.draggingInfo valueForKey:INITIAL_DRAG_LOCATION] pointValue]);
+    CGPoint initialDividerOrigin = NSPointToCGPoint([(NSValue *)[self.draggingInfo valueForKey:INITIAL_DIVIDER_ORIGIN] pointValue]);
+    TUIView *currentlyDraggingDivider = [self.draggingInfo valueForKey:CURRENT_DIVIDER];
+    NSUInteger dividerIndex = [self.dividers indexOfObject:subview];
+    TUIView *splitViewOne = [self.splitViews objectAtIndex:dividerIndex];
+    TUIView *splitViewTwo = [self.splitViews objectAtIndex:dividerIndex + 1];
+    
+    CGFloat deltaY = self.isHorizontal ? ceil([theEvent locationInWindow].y - initialDragLocation.y) : 0.f;
+    CGFloat deltaX = self.isHorizontal ? 0.f : ceil([theEvent locationInWindow].x - initialDragLocation.x);
+    CGPoint point = initialDividerOrigin;
+    
+    point.y += deltaY;
+    point.x += deltaX;
+    
+    if (point.x < 0.f)
+        point.x = 0.f;
+    
+    else if (point.y < 0.f)
+        point.y = 0.f;
+    
+    else if (point.x > self.frame.size.width - self.dividerThickness)
+        point.x = self.frame.size.width - self.dividerThickness;
+    
+    else if (point.y > self.frame.size.height - self.dividerThickness)
+        point.y = self.frame.size.height - self.dividerThickness;
+    
+    CGSize currentSize = currentlyDraggingDivider.frame.size;
+    CGRect newRect = (CGRect){ point, currentSize };    
+    currentlyDraggingDivider.frame = newRect;
+            
+    CGRect splitViewOneFrame = NSRectToCGRect([(NSValue *)[self.draggingInfo valueForKey:FIRST_SPLITVIEW_FRAME] rectValue]);
+    CGRect splitViewTwoFrame = NSRectToCGRect([(NSValue *)[self.draggingInfo valueForKey:SECOND_SPLITVEIW_FRAME] rectValue]);
+    
+    splitViewOneFrame.size.width += deltaX;
+    splitViewOneFrame.size.height += deltaY;
+    
+    splitViewTwoFrame.size.width -= deltaX;
+    splitViewTwoFrame.size.height -= deltaY;
+    splitViewTwoFrame.origin.x += deltaX;
+    splitViewTwoFrame.origin.y += deltaY;
+
+    splitViewOne.frame = splitViewOneFrame;
+    splitViewTwo.frame = splitViewTwoFrame;
+}
+
 
 @end
 
