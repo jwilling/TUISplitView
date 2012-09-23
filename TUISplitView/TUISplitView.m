@@ -509,8 +509,6 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 // This adjusts the subviews when the size is set. setFrame: calls this, so all is well. It calls
 // the delegate if implemented.
 - (void)layoutSubviews {
-	NSSize oldsize = [self frame].size;
-	CGRect newFrame = self.frame;
 	[super layoutSubviews];
 	
 	[self setMustAdjust];
