@@ -22,7 +22,7 @@
     if (!self)
         return nil;
     
-    self.backgroundColor = [TUIColor grayColor];
+    self.backgroundColor = [NSColor grayColor];
     self.splitViews = [NSMutableArray array];
     self.dividers = [NSMutableArray array];
     self.dividerThickness = 4.f;
@@ -40,7 +40,7 @@
     
     TUIView *divider = [[TUIView alloc] initWithFrame:CGRectZero];
     [self.dividers addObject:divider];
-    divider.backgroundColor = [TUIColor grayColor];
+    divider.backgroundColor = [NSColor grayColor];
     [self addSubview:divider];
     [self bringSubviewToFront:divider];
     
@@ -135,7 +135,6 @@
     if (_dividerDrawRectBlock == dividerDrawRectBlock)
         return;
     _dividerDrawRectBlock = [dividerDrawRectBlock copy];
-    
     for (TUIView *divider in self.dividers) {
         divider.drawRect = _dividerDrawRectBlock;
         [divider setNeedsDisplay];

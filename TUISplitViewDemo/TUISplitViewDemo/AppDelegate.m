@@ -10,18 +10,19 @@
     
     //TUISplitView *splitView = [[TUISplitView alloc] initWithFrame:view.frame splitViews:2];
     TUISplitView *splitView = [[TUISplitView alloc] initWithFrame:view.frame];
+	[splitView setAutoresizingMask:(TUIViewAutoresizingFlexibleSize)];
     splitView.horizontal = NO;
     view.rootView = splitView;
     
     TUIView *view1 = [[TUIView alloc] initWithFrame:CGRectZero];
-    view1.backgroundColor = [TUIColor redColor];
+    view1.backgroundColor = [NSColor redColor];
 #warning horizontal resizing might be off
     
     TUIView *view2 = [[TUIView alloc] initWithFrame:CGRectZero];
-    view2.backgroundColor = [TUIColor blueColor];
+    view2.backgroundColor = [NSColor blueColor];
     
     TUIView *view3 = [[TUIView alloc] initWithFrame:CGRectZero];
-    view3.backgroundColor = [TUIColor magentaColor];
+    view3.backgroundColor = [NSColor magentaColor];
     
     [splitView addSplitView:view1];
     [splitView addSplitView:view2];
@@ -46,7 +47,7 @@
         
         // Draw borders.
         float borderThickness = 1.0;
-        [[TUIColor colorWithWhite:0.7 alpha:1.0] set];
+        [[NSColor colorWithCalibratedWhite:0.7 alpha:1.0] set];
         CGRect borderRect = bounds;
         borderRect.size.width = borderThickness;
         CGContextFillRect(context, borderRect);
@@ -67,8 +68,8 @@
         gripRect.origin.y = ((rect.size.height - gripRect.size.height) / 2.0);
         
         float stripThickness = 1.0;
-        TUIColor *stripColor = [TUIColor colorWithWhite:0.35 alpha:1.0];
-        TUIColor *lightColor = [TUIColor colorWithWhite:1.0 alpha:1.0];
+        NSColor *stripColor = [NSColor colorWithCalibratedWhite:0.35 alpha:1.0];
+        NSColor *lightColor = [NSColor colorWithCalibratedWhite:1.0 alpha:1.0];
         float space = 3.0;
         gripRect.size.width = stripThickness;
         [stripColor set];
