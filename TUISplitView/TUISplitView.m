@@ -97,7 +97,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	// Saving the state is also disabled while dragging.
 	[self invalidateRestorableState];
 	if (recurse)
-		for (RBSplitSubview* sub in [self subviews])
+		for (TUISplitSubview* sub in [self subviews])
 			[[sub asSplitView] saveState:YES];
 	return YES;
 }
@@ -108,7 +108,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 - (NSArray*)arrayWithStates {
 	NSMutableArray* array = [NSMutableArray array];
 	[array addObject:[self stringWithSavedState]];
-	for (RBSplitSubview* sub in [self subviews]){
+	for (TUISplitSubview* sub in [self subviews]){
 		TUISplitView* suv = [sub asSplitView];
 		if (suv) {
 			[array addObject:[suv arrayWithStates]];
@@ -155,7 +155,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 - (NSString*)stringWithSavedState {
 	NSArray* subviews = [self subviews];
 	NSMutableString* result = [NSMutableString stringWithFormat:@"%ld",[subviews count]];
-	for (RBSplitSubview* sub in [self subviews]){
+	for (TUISplitSubview* sub in [self subviews]){
 		double size = [sub dimension];
 		if ([sub isCollapsed]) {
 			size = -size;
@@ -191,7 +191,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 				size = floor(size);
 				fract -= size;
 				DIM(frame.size) = size;
-				RBSplitSubview* sub = [subviews objectAtIndex:i];
+				TUISplitSubview* sub = [subviews objectAtIndex:i];
 				[sub RB___setFrame:frame withFraction:fract notify:NO];
 				if (negative) {
 					[sub RB___collapse];
@@ -242,7 +242,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	self = [self initWithFrame:frame];
 	if (self) {
 		while (count-->0) {
-			[self addSubview:[[RBSplitSubview alloc] initWithFrame:frame]];
+			[self addSubview:[[TUISplitSubview alloc] initWithFrame:frame]];
 		}
 		[self setMustAdjust];
 	}
@@ -370,8 +370,8 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 }
 
 // Returns the subview which a given identifier.
-- (RBSplitSubview*)subviewWithIdentifier:(NSString*)anIdentifier {
-	for (RBSplitSubview* sub in [self subviews]){
+- (TUISplitSubview*)subviewWithIdentifier:(NSString*)anIdentifier {
+	for (TUISplitSubview* sub in [self subviews]){
 		if ([anIdentifier isEqualToString:[sub identifier]]) {
 			return sub;
 		}
@@ -380,7 +380,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 }
 
 // Returns the subview at a given position
-- (RBSplitSubview*)subviewAtPosition:(NSUInteger)position {
+- (TUISplitSubview*)subviewAtPosition:(NSUInteger)position {
 	NSArray* subviews = [super subviews];
 	NSUInteger subcount = [subviews count];
 	if (position<subcount) {
@@ -449,40 +449,42 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 // These three methods add subviews. If aView isn't a RBSplitSubview, one is automatically inserted above
 // it, and aView's frame and resizing mask is set to occupy the entire RBSplitSubview.
 - (void)addSubview:(TUIView*)aView {
-	if ([aView isKindOfClass:[RBSplitSubview class]]) {
+	if ([aView isKindOfClass:[TUISplitSubview class]]) {
 		[super addSubview:aView];
 	} else {
 		CGRect newFrame = aView.frame;
 		newFrame.origin = NSZeroPoint;
 		[aView setFrame:newFrame];
 		
-		RBSplitSubview* sub = [[RBSplitSubview alloc] initWithFrame:[aView frame]];
+		TUISplitSubview* sub = [[TUISplitSubview alloc] initWithFrame:[aView frame]];
 		[aView setAutoresizingMask:TUIViewAutoresizingFlexibleSize];
 		[sub addSubview:aView];
 		[super addSubview:sub];
 	}
 	[self setMustAdjust];
+	[self adjustSubviews];
 }
 
 - (void)addSubview:(TUIView*)aView positioned:(NSWindowOrderingMode)place relativeTo:(TUIView*)otherView {
-	if ([aView isKindOfClass:[RBSplitSubview class]]) {
+	if ([aView isKindOfClass:[TUISplitSubview class]]) {
 		[super addSubview:aView];
 	} else {
 		CGRect newFrame = aView.frame;
 		newFrame.origin = NSZeroPoint;
 		[aView setFrame:newFrame];
 		
-		RBSplitSubview* sub = [[RBSplitSubview alloc] initWithFrame:[aView frame]];
+		TUISplitSubview* sub = [[TUISplitSubview alloc] initWithFrame:[aView frame]];
 		[aView setAutoresizingMask:TUIViewAutoresizingFlexibleSize];
 		[sub addSubview:aView];
 		[super addSubview:sub];
 		[aView setAutoresizingMask:TUIViewAutoresizingFlexibleSize];
 	}
 	[self setMustAdjust];
+	[self adjustSubviews];
 }
 
 - (void)addSubview:(TUIView*)aView atPosition:(NSUInteger)position {
-	RBSplitSubview* suv = [self subviewAtPosition:position];
+	TUISplitSubview* suv = [self subviewAtPosition:position];
 	if (suv) {
 		[self addSubview:aView positioned:NSWindowBelow relativeTo:suv];
 	} else {
@@ -493,7 +495,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 // This makes sure the subviews are adjusted after a subview is removed.
 - (void)willRemoveSubview:(TUIView*)subview {
 	if ([subview respondsToSelector:@selector(RB___stopAnimation)]) {
-		[(RBSplitSubview*)subview RB___stopAnimation];
+		[(TUISplitSubview*)subview RB___stopAnimation];
 	}
 	[super willRemoveSubview:subview];
 	[self setMustAdjust];
@@ -506,23 +508,12 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 
 // This adjusts the subviews when the size is set. setFrame: calls this, so all is well. It calls
 // the delegate if implemented.
-- (void)setFrameSize:(NSSize)size {
-	//	NSLog(@"setFrameSize of %@ to %@",self,NSStringFromSize(size));
+- (void)layoutSubviews {
 	NSSize oldsize = [self frame].size;
 	CGRect newFrame = self.frame;
-	newFrame.size = oldsize;
-	[super setFrame:newFrame];
+	[super layoutSubviews];
 	
 	[self setMustAdjust];
-	if ([delegate respondsToSelector:@selector(splitView:wasResizedFrom:to:)]) {
-		BOOL ishor = [self isHorizontal];
-		CGFloat olddim = DIM(oldsize);
-		CGFloat newdim = DIM(size);
-		// The delegate is not called if the dimension hasn't changed.
-		if (((NSInteger)newdim!=(NSInteger)olddim)) {
-			[delegate splitView:self wasResizedFrom:olddim to:newdim];
-		}
-	}
 	// We adjust the subviews only if the delegate didn't.
 	if (mustAdjust&&!isAdjusting) {
 		[self adjustSubviews];
@@ -582,7 +573,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 						if (lcan&&tcan) {
 							// If both are collapsible, we try asking the delegate.
 							if ([delegate respondsToSelector:@selector(splitView:collapseLeading:orTrailing:)]) {
-								RBSplitSubview* sub = [delegate splitView:self collapseLeading:leading orTrailing:trailing];
+								TUISplitSubview* sub = [delegate splitView:self collapseLeading:leading orTrailing:trailing];
 								// If the delegate returns nil, neither view will collapse.
 								lcan = sub==leading;
 								tcan = sub==trailing;
@@ -716,6 +707,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	// Cache the divider image.
 	NSImage* divdr = [self dividerThumb];
 	CGFloat divt = [self dividerThickness];
+	
 	// Loop over the divider rectangles.
 	for (i=0;i<subcount;i++) {
 		TUISplitView* leading = [subviews objectAtIndex:i];
@@ -745,7 +737,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 // will be the thumb rectangle.
 // If there are nested split views this will be called once to draw the main divider rect,
 // and again for every thumb.
-- (void)drawDivider:(NSImage*)anImage inRect:(NSRect)rect betweenView:(RBSplitSubview*)leading andView:(RBSplitSubview*)trailing {
+- (void)drawDivider:(NSImage*)anImage inRect:(NSRect)rect betweenView:(TUISplitSubview*)leading andView:(TUISplitSubview*)trailing {
 	// Fill the view with the background color (if there's any). Don't draw the background again for
 	// thumbs.
 	if (leading||trailing) {
@@ -775,7 +767,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 
 // This method should be called only from within the splitView:wasResizedFrom:to: delegate method
 // to keep some specific subview the same size.
-- (void)adjustSubviewsExcepting:(RBSplitSubview*)excepting {
+- (void)adjustSubviewsExcepting:(TUISplitSubview*)excepting {
 	[self _adjustSubviewsExcepting:[excepting isCollapsed]?nil:excepting];
 }
 
@@ -910,7 +902,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 // This returns the number of visible subviews.
 - (NSUInteger)RB___numberOfSubviews {
 	NSUInteger result = 0;
-	for (RBSplitSubview* sub in [self subviews]) {
+	for (TUISplitSubview* sub in [self subviews]) {
 		if (![sub isHidden]) {
 			++result;
 		}
@@ -933,7 +925,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	NSMutableArray* result = [NSMutableArray arrayWithArray:[self subviews]];
 	NSInteger i;
 	for (i=[result count]-1;i>=0;i--) {
-		RBSplitSubview* view = [result objectAtIndex:i];
+		TUISplitSubview* view = [result objectAtIndex:i];
 		if ([view isHidden]) {
 			[result removeObjectAtIndex:i];
 		}
@@ -999,7 +991,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 
 // This local method asks the delegate if we should resize the trailing subview or the window
 // when a divider is dragged. Not called if we're inside an TUIScrollView.
-- (BOOL)_shouldResizeWindowForDivider:(NSUInteger)indx betweenView:(RBSplitSubview*)leading andView:(RBSplitSubview*)trailing willGrow:(BOOL)grow {
+- (BOOL)_shouldResizeWindowForDivider:(NSUInteger)indx betweenView:(TUISplitSubview*)leading andView:(TUISplitSubview*)trailing willGrow:(BOOL)grow {
 	if (!isInScrollView&&[delegate respondsToSelector:@selector(splitView:shouldResizeWindowForDivider:betweenView:andView:willGrow:)]) {
 		return [delegate splitView:self shouldResizeWindowForDivider:indx betweenView:leading andView:trailing willGrow:grow];
 	}
@@ -1007,7 +999,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 }
 
 // This local method tries to expand the leading subview (which is assumed to be collapsed). Delta should be positive.
-- (void)_tryToExpandLeading:(RBSplitSubview*)leading divider:(NSUInteger)indx trailing:(RBSplitSubview*)trailing delta:(CGFloat)delta {
+- (void)_tryToExpandLeading:(TUISplitSubview*)leading divider:(NSUInteger)indx trailing:(TUISplitSubview*)trailing delta:(CGFloat)delta {
 	NSWindow* window = nil;
 	TUIView* document = nil;
 	NSSize maxsize = NSMakeSize(WAYOUT,WAYOUT);
@@ -1078,7 +1070,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 // This local method tries to shorten the leading subview. Both subviews are assumed to be expanded.
 // delta should be negative. If always is NO, the subview will be shortened only if it might also be
 // collapsed; otherwise, it's shortened as much as possible.
-- (void)_tryToShortenLeading:(RBSplitSubview*)leading divider:(NSUInteger)indx trailing:(RBSplitSubview*)trailing delta:(CGFloat)delta always:(BOOL)always {
+- (void)_tryToShortenLeading:(TUISplitSubview*)leading divider:(NSUInteger)indx trailing:(TUISplitSubview*)trailing delta:(CGFloat)delta always:(BOOL)always {
 	NSWindow* window = nil;
 	TUIView* document = nil;
 	NSSize minsize = NSZeroSize;
@@ -1139,7 +1131,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 // This local method tries to shorten the trailing subview. Both subviews are assumed to be expanded.
 // delta should be positive. If always is NO, the subview will be shortened only if it might also be
 // collapsed; otherwise, it's shortened as much as possible.
-- (void)_tryToShortenTrailing:(RBSplitSubview*)trailing divider:(NSUInteger)indx leading:(RBSplitSubview*)leading delta:(CGFloat)delta always:(BOOL)always {
+- (void)_tryToShortenTrailing:(TUISplitSubview*)trailing divider:(NSUInteger)indx leading:(TUISplitSubview*)leading delta:(CGFloat)delta always:(BOOL)always {
 	NSWindow* window = nil;
 	TUIView* document = nil;
 	NSSize maxsize = NSMakeSize(WAYOUT,WAYOUT);
@@ -1203,7 +1195,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 }
 
 // This method tries to expand the trailing subview (which is assumed to be collapsed).
-- (void)_tryToExpandTrailing:(RBSplitSubview*)trailing leading:(RBSplitSubview*)leading delta:(CGFloat)delta {
+- (void)_tryToExpandTrailing:(TUISplitSubview*)trailing leading:(TUISplitSubview*)leading delta:(CGFloat)delta {
 	// The mouse has to move over half of the expanded size (plus hysteresis) and the expansion shouldn't
 	// reduce the leading subview to less than its minimum size. If it does, we try to collapse it first.
 	// However, we don't collapse if that would cause the trailing subview to become larger than its maximum.
@@ -1246,8 +1238,8 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	NSPoint result;
 	NSUInteger k;
 	// leading and trailing point at the subviews immediately leading and trailing the divider being tracked
-	RBSplitSubview* leading = [subviews objectAtIndex:indx];
-	RBSplitSubview* trailing = [subviews objectAtIndex:indx+1];
+	TUISplitSubview* leading = [subviews objectAtIndex:indx];
+	TUISplitSubview* trailing = [subviews objectAtIndex:indx+1];
 	// Convert the mouse coordinates to apply to the same system the divider rects are in.
 	NSPoint mouse = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 	mouse.x -= base.x;
@@ -1261,7 +1253,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 		// Negative delta means the mouse is being moved left or upwards.
 		// firstLeading will point at the first expanded subview to the left (or upwards) of the divider.
 		// If there's none (all subviews are collapsed) it will point at the nearest subview.
-		RBSplitSubview* firstLeading = leading;
+		TUISplitSubview* firstLeading = leading;
 		k = indx;
 		while (![firstLeading canShrink]) {
 			if (k==0) {
@@ -1270,7 +1262,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 			}
 			firstLeading = [subviews objectAtIndex:--k];
 		}
-		RBSplitSubview* firstTrailing = trailing;
+		TUISplitSubview* firstTrailing = trailing;
 		k = indx+1;
 		while (![firstTrailing canExpand]) {
 			if (k==subcount) {
@@ -1293,7 +1285,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 		// Positive delta means the mouse is being moved right or downwards.
 		// firstTrailing will point at the first expanded subview to the right (or downwards) of the divider.
 		// If there's none (all subviews are collapsed) it will point at the nearest subview.
-		RBSplitSubview* firstTrailing = nil;
+		TUISplitSubview* firstTrailing = nil;
 		if (!isInScrollView) {
 			firstTrailing = trailing;
 			k = indx+1;
@@ -1305,7 +1297,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 				firstTrailing = [subviews objectAtIndex:k];
 			}
 		}
-		RBSplitSubview* firstLeading = leading;
+		TUISplitSubview* firstLeading = leading;
 		k = indx;
 		while (![firstLeading canExpand]) {
 			if (k==0) {
@@ -1396,7 +1388,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 // least one expanded subview, and never make a subview smaller than its minimum dimension, or larger
 // than its maximum dimension.
 // We try to account for most unusual situations but this may fail under some circumstances. YMMV.
-- (void)_adjustSubviewsExcepting:(RBSplitSubview*)excepting {
+- (void)_adjustSubviewsExcepting:(TUISplitSubview*)excepting {
 	mustAdjust = NO;
 	NSArray* subviews = [self RB___subviews];
 	NSUInteger subcount = [subviews count];
@@ -1608,7 +1600,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	NSRect newframe = NSMakeRect(0.0,0.0,bounds.size.width,bounds.size.height);
 	// We now loop over the subviews yet again and set the definite frames, also recalculating the
 	// divider rectangles as we go along, and collapsing and expanding subviews whenever requested.
-	RBSplitSubview* last = nil;
+	TUISplitSubview* last = nil;
 	// And we make a note if there's any nested TUISplitView.
 	NSInteger nested = NSNotFound;
 	//	newsize = DIM(bounds.size)-divcount*divt;

@@ -15,7 +15,7 @@
 // we allow only one animation to take place at a time.
 static animationData* currentAnimation = NULL;
 
-@implementation RBSplitSubview
+@implementation TUISplitSubview
 
 // This class method returns YES if an animation is in progress.
 + (BOOL)animating {
@@ -175,12 +175,12 @@ static animationData* currentAnimation = NULL;
 }
 
 // Returns the subview's status.
-- (RBSSubviewStatus)status {
+- (TUISubviewStatus)status {
 	animationData* anim = [self RB___animationData:NO resize:NO];
 	if (anim) {
-		return anim->collapsing?RBSSubviewCollapsing:RBSSubviewExpanding;
+		return anim->collapsing?TUISubviewCollapsing:TUISubviewExpanding;
 	}
-	return [self RB___visibleDimension]<=0.0?RBSSubviewCollapsed:RBSSubviewNormal;
+	return [self RB___visibleDimension]<=0.0?TUISubviewCollapsed:TUISubviewNormal;
 }
 
 // Tests whether the subview can be collapsed. The local instance variable will be overridden by the
@@ -238,7 +238,7 @@ static animationData* currentAnimation = NULL;
 // They return YES if animation startup was successful. If resize is NO, the subview is
 // collapsed/expanded without resizing it during animation.
 - (BOOL)collapseWithAnimation:(BOOL)animate withResize:(BOOL)resize {
-	if ([self status]==RBSSubviewNormal) {
+	if ([self status]==TUISubviewNormal) {
 		if ([self canCollapse]) {
 			if (animate&&[self RB___animationData:YES resize:resize]) {
 				[self _clearResponder];
@@ -253,7 +253,7 @@ static animationData* currentAnimation = NULL;
 }
 
 - (BOOL)expandWithAnimation:(BOOL)animate withResize:(BOOL)resize {
-	if ([self status]==RBSSubviewCollapsed) {
+	if ([self status]==TUISubviewCollapsed) {
 		if (animate&&[self RB___animationData:YES resize:resize]) {
 			[self RB___stepAnimation];
 			return YES;
@@ -583,7 +583,7 @@ static animationData* currentAnimation = NULL;
 
 @end
 
-@implementation RBSplitSubview (RB___SubviewAdditions)
+@implementation TUISplitSubview (RB___SubviewAdditions)
 
 // This hides/shows the subview without calling adjustSubviews.
 - (void)RB___setHidden:(BOOL)flag {
@@ -666,8 +666,8 @@ static animationData* currentAnimation = NULL;
 				anim->elapsedTime += [NSDate timeIntervalSinceReferenceDate]-now;
 				++anim->stepsDone;
 // Schedule a timer to do the next animation step.
-				[self performSelector:@selector(RB___stepAnimation) withObject:nil afterDelay:delay inModes:[NSArray arrayWithObjects:NSDefaultRunLoopMode,NSModalPanelRunLoopMode,
-					NSEventTrackingRunLoopMode,nil]];
+				[self performSelector:@selector(RB___stepAnimation) withObject:nil afterDelay:delay inModes:@[NSDefaultRunLoopMode,NSModalPanelRunLoopMode,
+					NSEventTrackingRunLoopMode]];
 				return;
 			}
 		}

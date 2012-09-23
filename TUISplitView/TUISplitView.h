@@ -1,5 +1,5 @@
 #import <TwUI/TUIKit.h>
-#import "RBSplitSubview.h"
+#import "TUISplitSubview.h"
 
 typedef void(^TUISplitViewDividerDrawRect)(CGRect);
 
@@ -12,7 +12,7 @@ typedef enum {
 	TUICursorTypeCount
 } TUICursorType;
 
-@interface TUISplitView : RBSplitSubview {
+@interface TUISplitView : TUISplitSubview {
 	// Subclasses normally should use setter methods instead of changing instance variables by assignment.
 	// Most getter methods simply return the corresponding instance variable, so with some care, subclasses
 	// could reference them directly.
@@ -81,10 +81,10 @@ typedef enum {
 - (id)delegate;
 
 // Returns a subview which has a certain identifier string, or nil if there's none
-- (RBSplitSubview*)subviewWithIdentifier:(NSString*)anIdentifier;
+- (TUISplitSubview*)subviewWithIdentifier:(NSString*)anIdentifier;
 
 // Returns the subview at a certain position. Returns nil if the position is invalid.
-- (RBSplitSubview*)subviewAtPosition:(NSUInteger)position;
+- (TUISplitSubview*)subviewAtPosition:(NSUInteger)position;
 
 // Adds a subview at a certain position.
 - (void)addSubview:(TUIView*)aView atPosition:(NSUInteger)position;
@@ -126,11 +126,11 @@ typedef enum {
 
 // This method should be called only from within the splitView:wasResizedFrom:to: delegate method
 // to keep some specific subview the same size.
-- (void)adjustSubviewsExcepting:(RBSplitSubview*)excepting;
+- (void)adjustSubviewsExcepting:(TUISplitSubview*)excepting;
 
 // This method draws dividers. You should never call it directly but you can override it when
 // subclassing, if you need custom dividers.
-- (void)drawDivider:(NSImage*)anImage inRect:(NSRect)rect betweenView:(RBSplitSubview*)leading andView:(RBSplitSubview*)trailing;
+- (void)drawDivider:(NSImage*)anImage inRect:(NSRect)rect betweenView:(TUISplitSubview*)leading andView:(TUISplitSubview*)trailing;
 
 @end
 
@@ -142,7 +142,7 @@ typedef enum {
 // The delegate can override a subview's ability to collapse by implementing this method.
 // Return YES to allow collapsing. If this is implemented, the subviews' built-in
 // 'collapsed' flags are ignored.
-- (BOOL)splitView:(TUISplitView*)sender canCollapse:(RBSplitSubview*)subview;
+- (BOOL)splitView:(TUISplitView*)sender canCollapse:(TUISplitSubview*)subview;
 
 // The delegate can alter the divider's appearance by implementing this method.
 // Before calling this, the divider is filled with the background, and afterwards
@@ -151,12 +151,12 @@ typedef enum {
 // NSZeroRect to suppress the divider image. Return imageRect to use the default
 // location for the image, or change its origin to place the image elsewhere.
 // You could also draw the divider yourself at this point and return NSZeroRect.
-- (NSRect)splitView:(TUISplitView*)sender willDrawDividerInRect:(NSRect)dividerRect betweenView:(RBSplitSubview*)leading andView:(RBSplitSubview*)trailing withProposedRect:(NSRect)imageRect;
+- (NSRect)splitView:(TUISplitView*)sender willDrawDividerInRect:(NSRect)dividerRect betweenView:(TUISplitSubview*)leading andView:(TUISplitSubview*)trailing withProposedRect:(NSRect)imageRect;
 
 // These methods are called after a subview is completely collapsed or expanded. adjustSubviews may or may not
 // have been called, however.
-- (void)splitView:(TUISplitView*)sender didCollapse:(RBSplitSubview*)subview;
-- (void)splitView:(TUISplitView*)sender didExpand:(RBSplitSubview*)subview;
+- (void)splitView:(TUISplitView*)sender didCollapse:(TUISplitSubview*)subview;
+- (void)splitView:(TUISplitView*)sender didExpand:(TUISplitSubview*)subview;
 
 // These methods are called just before and after adjusting subviews.
 - (void)willAdjustSubviews:(TUISplitView*)sender;
@@ -169,7 +169,7 @@ typedef enum {
 // This method will be called when a divider is double-clicked and both leading and trailing
 // subviews can be collapsed. Return either of the parameters to collapse that subview, or nil
 // to collapse neither. If not implemented, the smaller subview will be collapsed.
-- (RBSplitSubview*)splitView:(TUISplitView*)sender collapseLeading:(RBSplitSubview*)leading orTrailing:(RBSplitSubview*)trailing;
+- (TUISplitSubview*)splitView:(TUISplitView*)sender collapseLeading:(TUISplitSubview*)leading orTrailing:(TUISplitSubview*)trailing;
 
 // This method will be called when a cursor rect is being set (inside resetCursorRects). The
 // proposed rect is passed in. Return the actual rect, or NSZeroRect to suppress cursor setting
@@ -179,29 +179,29 @@ typedef enum {
 
 // This method will be called whenever a mouse-down event is received in a divider. Return YES to have
 // the event handled by the split view, NO if you wish to ignore it or handle it in the delegate.
-- (BOOL)splitView:(TUISplitView*)sender shouldHandleEvent:(NSEvent*)theEvent inDivider:(NSUInteger)divider betweenView:(RBSplitSubview*)leading andView:(RBSplitSubview*)trailing;
+- (BOOL)splitView:(TUISplitView*)sender shouldHandleEvent:(NSEvent*)theEvent inDivider:(NSUInteger)divider betweenView:(TUISplitSubview*)leading andView:(TUISplitSubview*)trailing;
 
 // This method will be called just before a subview will be collapsed or expanded with animation.
 // Return the approximate time the animation should take, or 0.0 to disallow animation.
 // If not implemented, it will use the default of 0.2 seconds per 150 pixels.
-- (NSTimeInterval)splitView:(TUISplitView*)sender willAnimateSubview:(RBSplitSubview*)subview withDimension:(CGFloat)dimension;
+- (NSTimeInterval)splitView:(TUISplitView*)sender willAnimateSubview:(TUISplitSubview*)subview withDimension:(CGFloat)dimension;
 
 // This method will be called whenever a subview's frame is changed, usually from inside adjustSubviews' final loop.
 // You'd normally use this to move some auxiliary view to keep it aligned with the subview.
-- (void)splitView:(TUISplitView*)sender changedFrameOfSubview:(RBSplitSubview*)subview from:(NSRect)fromRect to:(NSRect)toRect;
+- (void)splitView:(TUISplitView*)sender changedFrameOfSubview:(TUISplitSubview*)subview from:(NSRect)fromRect to:(NSRect)toRect;
 
 // This method is called whenever the event handlers want to check if some point within the RBSplitSubview
 // should act as an alternate drag view. Usually, the delegate will check the point (which is in sender's
 // local coordinates) against the frame of one or several auxiliary views, and return a valid divider number.
 // Returning NSNotFound means the point is not valid.
-- (NSUInteger)splitView:(TUISplitView*)sender dividerForPoint:(NSPoint)point inSubview:(RBSplitSubview*)subview;
+- (NSUInteger)splitView:(TUISplitView*)sender dividerForPoint:(NSPoint)point inSubview:(TUISplitSubview*)subview;
 
 // This method is called continuously while a divider is dragged, just before the leading subview is resized.
 // Return NO to resize the trailing view by the same amount, YES to resize the containing window by the same amount.
-- (BOOL)splitView:(TUISplitView*)sender shouldResizeWindowForDivider:(NSUInteger)divider betweenView:(RBSplitSubview*)leading andView:(RBSplitSubview*)trailing willGrow:(BOOL)grow;
+- (BOOL)splitView:(TUISplitView*)sender shouldResizeWindowForDivider:(NSUInteger)divider betweenView:(TUISplitSubview*)leading andView:(TUISplitSubview*)trailing willGrow:(BOOL)grow;
 
 // This method is called by each subview's drawRect: method, just after filling it with the background color but
 // before the contained subviews are drawn. Usually you would use this to draw a frame inside the subview.
-- (void)splitView:(TUISplitView*)sender willDrawSubview:(RBSplitSubview*)subview inRect:(NSRect)rect;
+- (void)splitView:(TUISplitView*)sender willDrawSubview:(TUISplitSubview*)subview inRect:(NSRect)rect;
 
 @end

@@ -13,13 +13,13 @@
 
 // These values are used to inquire about the status of a subview.
 typedef enum {
-	RBSSubviewExpanding=-2,
-	RBSSubviewCollapsing=-1,
-	RBSSubviewNormal=0,
-	RBSSubviewCollapsed=1
-} RBSSubviewStatus;
+	TUISubviewExpanding=-2,
+	TUISubviewCollapsing=-1,
+	TUISubviewNormal=0,
+	TUISubviewCollapsed=1
+} TUISubviewStatus;
 
-@interface RBSplitSubview : TUIView {
+@interface TUISplitSubview : TUIView {
 // Subclasses normally should use setter methods instead of changing instance variables by assignment.
 // Most getter methods simply return the corresponding instance variable, so with some care, subclasses
 // could reference them directly.
@@ -89,7 +89,7 @@ typedef enum {
 
 // This will return the current status of the subview. Negative values mean the subview is
 // being animated.
-- (RBSSubviewStatus)status;
+- (TUISubviewStatus)status;
 
 // Sets and gets the ability to collapse the subview. However, this can be overridden by the delegate.
 - (BOOL)canCollapse;

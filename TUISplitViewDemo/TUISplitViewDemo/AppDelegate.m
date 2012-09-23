@@ -15,14 +15,16 @@
     splitView.vertical = YES;
     view.rootView = splitView;
     
-    RBSplitSubview *view1 = [[RBSplitSubview alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
-	[view1 setAutoresizingMask:TUIViewAutoresizingFlexibleSize];
-    view1.backgroundColor = [NSColor redColor];
+    TUISplitSubview *view1 = [[TUISplitSubview alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
+    view1.drawRect = ^(TUIView *view, CGRect rect) {
+		NSGradient *gradient = [[NSGradient alloc]initWithColors:@[[NSColor redColor], [NSColor purpleColor]]];
+		[gradient drawInRect:rect angle:90.0f];
+	};
     
-    RBSplitSubview *view2 = [[RBSplitSubview alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
+    TUISplitSubview *view2 = [[TUISplitSubview alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
     view2.backgroundColor = [NSColor blueColor];
     
-    RBSplitSubview *view3 = [[RBSplitSubview alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
+    TUISplitSubview *view3 = [[TUISplitSubview alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
     view3.backgroundColor = [NSColor magentaColor];
     
     [splitView addSubview:view1];
@@ -55,9 +57,6 @@
         CGContextFillRect(context, borderRect);
         
         // Draw grip.
-        
-        
-        
         float width = 9.0;
         float height;
         height = 30.0;
@@ -103,7 +102,7 @@
         CGContextFillRect(context, gripRect);
     };
     //[self restoreState];
-	[splitView adjustSubviews];
+	
 }
 
 - (TUISplitView *)splitView {
@@ -122,13 +121,8 @@
     //[self saveState];
 }
 
-// This keeps firstSplit and nestedSplit the same size whenever the window is resized.
-- (void)splitView:(TUISplitView*)sender wasResizedFrom:(CGFloat)oldDimension to:(CGFloat)newDimension {
-	[sender adjustSubviewsExcepting:nil];
-}
-
 // This collapses/expands the first subview with animation and resizing when double-clicking.
-- (BOOL)splitView:(TUISplitView*)sender shouldHandleEvent:(NSEvent*)theEvent inDivider:(NSUInteger)divider betweenView:(RBSplitSubview*)leading andView:(RBSplitSubview*)trailing {
+- (BOOL)splitView:(TUISplitView*)sender shouldHandleEvent:(NSEvent*)theEvent inDivider:(NSUInteger)divider betweenView:(TUISplitSubview*)leading andView:(TUISplitSubview*)trailing {
 	if (([theEvent clickCount]>1)) {
 		if ([leading isCollapsed]) {
 			[leading expandWithAnimation:YES withResize:YES];
