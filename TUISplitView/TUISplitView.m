@@ -264,7 +264,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 		isCoupled = flag;
 		// If we've just been uncoupled and there's no divider image, we copy it from the containing view.
 		if (!isCoupled&&!divider) {
-			[self setDivider:[[self splitView] divider]];
+			[self setDivider:[[self splitView] dividerThumb]];
 		}
 		[self setMustAdjust];
 	}
@@ -402,9 +402,9 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 // divider thickness. A nil image means a 0-pixel wide divider, unless you set a thickness explicitly.
 // For a nested TUISplitView, the divider is copied from the containing TUISplitView, and
 // setting it has no effect. The returned image is always flipped.
-- (NSImage*)divider {
+- (NSImage*)dividerThumb {
 	TUISplitView* sv = [self couplingSplitView];
-	return sv?[sv divider]:divider;
+	return sv?[sv dividerThumb]:divider;
 }
 
 - (void)setDivider:(NSImage*)image {
@@ -429,13 +429,13 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	if (dividerThickness>0.0) {
 		return dividerThickness;
 	}
-	NSImage* divdr = [self divider];
+	NSImage* divdr = [self dividerThumb];
 	if (divdr) {
 		NSSize size = [divdr size];
 		BOOL ishor = [self isHorizontal];
 		return DIM(size);
 	}
-	return 0.0;
+	return 4.0;
 }
 
 - (void)setDividerThickness:(CGFloat)thickness {
@@ -542,7 +542,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 		return;
 	}
 	// If the mousedown was in an alternate dragview, or if there's no divider image, handle it in RBSplitSubview.
-	if ((actDivider<NSNotFound)||![self divider]) {
+	if ((actDivider<NSNotFound)) {
 		[super mouseDown:theEvent];
 		return;
 	}
@@ -565,6 +565,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 			}
 			// If it's a double click, try to expand or collapse one of the neighboring subviews.
 			if ([theEvent clickCount]>1) {
+				
 				// If both are collapsed, we do nothing. If one of them is collapsed, we try to expand it.
 				if ([trailing isCollapsed]) {
 					if (![leading isCollapsed]) {
@@ -605,9 +606,10 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 					[self RB___setMustClearFractions];
 					TUISplitView* sv = [self splitView];
 					[sv?sv:self adjustSubviews];
-					[super setNeedsDisplay];
+					[self display];
 				}
 			} else {
+
 				// Single click; record the offsets within the divider rectangle and check for nesting.
 				CGFloat divt = [self dividerThickness];
 				CGFloat offset = DIM(where)-DIM(divdr->origin);
@@ -656,7 +658,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 						// several divider rectangles may have changed.
 						TUISplitView* sv = [self splitView];
 						[sv?sv:self adjustSubviews];
-						[super setNeedsDisplay];
+						[self display];
 						divdr = &dividers[i];
 						// Adjust to the new cursor coordinates.
 						DIM(where) = DIM(divdr->origin)+offset;
@@ -712,7 +714,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	--subcount;
 	NSUInteger i;
 	// Cache the divider image.
-	NSImage* divdr = [self divider];
+	NSImage* divdr = [self dividerThumb];
 	CGFloat divt = [self dividerThickness];
 	// Loop over the divider rectangles.
 	for (i=0;i<subcount;i++) {
@@ -766,8 +768,8 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 		dorect = [delegate splitView:self willDrawDividerInRect:rect betweenView:leading andView:trailing withProposedRect:dorect];
 	}
 	// Draw the image if the delegate returned a non-empty rect.
-	if (!NSIsEmptyRect(dorect)) {
-		[anImage drawInRect:dorect fromRect:imrect operation:NSCompositeSourceOver fraction:1.0];
+	if (!NSIsEmptyRect(rect) && self.dividerDrawRectBlock != nil) {
+		self.dividerDrawRectBlock(rect);
 	}
 }
 
@@ -791,7 +793,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	id del = [delegate respondsToSelector:@selector(splitView:cursorRect:forDivider:)]?delegate:nil;
 	NSArray* subviews = [self RB___subviews];
 	NSInteger divcount = [subviews count]-1;
-	if ((divcount<1)||![self divider]) {
+	if ((divcount<1)) {
 		[del splitView:self cursorRect:NSZeroRect forDivider:0];
 		return;
 	}
@@ -1325,9 +1327,10 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 
 // This is called for nested TUISplitViews, to add the cursor rects for the two-axis thumbs.
 - (void)_addCursorRectsTo:(TUISplitView*)masterView forDividerRect:(NSRect)rect thickness:(CGFloat)delta {
-	if (dividers&&[self divider]) {
+	if (dividers) {
 		NSArray* subviews = [self RB___subviews];
 		NSInteger divcount = [subviews count]-1;
+
 		if (divcount<1) {
 			return;
 		}
@@ -1354,6 +1357,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	if (!dividers) {
 		return;
 	}
+
 	NSArray* subviews = [self RB___subviews];
 	NSInteger divcount = [subviews count]-1;
 	if (divcount<1) {
@@ -1361,8 +1365,6 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	}
 	NSInteger i;
 	BOOL ishor = [self isHorizontal];
-	// Get the outer split view's divider image.
-	NSImage* image = [masterView divider];
 	// Loop over the divider rectangles, intersect them with the view's own, and draw the thumb there.
 	for (i=0;i<divcount;i++) {
 		NSRect divdr = dividers[i];
@@ -1370,8 +1372,8 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 		OTHER(divdr.origin) -= delta;
 		OTHER(divdr.size) += 2*delta;
 		divdr = NSIntersectionRect(divdr,rect);
-		if (!NSIsEmptyRect(divdr)) {
-			[masterView drawDivider:image inRect:divdr betweenView:nil andView:nil];
+		if (!NSIsEmptyRect(divdr) && self.dividerDrawRectBlock != nil) {
+			self.dividerDrawRectBlock(divdr);
 		}
 	}
 }
@@ -1426,7 +1428,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 	} else {
 		// Try to allocate or resize if we already have a dividers array.
 		NSUInteger divsiz = sizeof(NSRect)*divcount;
-		dividers = (NSRect*)(dividers?reallocf(dividers,divsiz):malloc(divsiz));
+		dividers = (NSRect*)(dividers?reallocf(dividers,divsiz):malloc(divsiz));		
 		if (!dividers) {
 			return;
 		}
@@ -1492,7 +1494,7 @@ static inline CGFloat fMAX(CGFloat a,CGFloat b) {
 			// the other way around.
 			DIM(bounds.size) = expsize;
 			break;
-		} else {
+		} else {			
 			// If the total dimension of all expanded subviews is less than 1.0 we set the dimension of the smallest
 			// subview (which we're sure is expanded at this point) to the available space.
 			newsize = DIM(bounds.size)-divcount*divt;

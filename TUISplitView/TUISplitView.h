@@ -1,6 +1,8 @@
 #import <TwUI/TUIKit.h>
 #import "RBSplitSubview.h"
 
+typedef void(^TUISplitViewDividerDrawRect)(CGRect);
+
 // These values are used to handle the various cursor types.
 typedef enum {
 	TUIHorizontalCursor=0,		// appears over horizontal dividers
@@ -94,7 +96,7 @@ typedef enum {
 - (void)setDividerThickness:(CGFloat)thickness;
 - (CGFloat)dividerThickness;
 
-@property (nonatomic, copy) TUIViewDrawRect dividerDrawRectBlock;
+@property (nonatomic, copy) TUISplitViewDividerDrawRect dividerDrawRectBlock;
 
 
 // Sets and gets the orientation. This uses the same convention as NSSplitView: vertical means the

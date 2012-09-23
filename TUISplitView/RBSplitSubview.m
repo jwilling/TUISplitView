@@ -332,7 +332,9 @@ static animationData* currentAnimation = NULL;
 // The delegate would usually draw a frame inside the subview.
 - (void)drawRect:(NSRect)rect {
 	[super drawRect:rect];
-
+	[self.backgroundColor set];
+	NSRectFill(rect);
+	
 	TUISplitView* sv = [self splitView];
 	id del = [sv delegate];
 	if ([del respondsToSelector:@selector(splitView:willDrawSubview:inRect:)]) {
