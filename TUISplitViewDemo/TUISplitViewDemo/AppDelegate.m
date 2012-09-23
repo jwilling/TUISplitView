@@ -9,19 +9,19 @@
     view.autoresizingMask = TUIViewAutoresizingFlexibleSize;
     
     //TUISplitView *splitView = [[TUISplitView alloc] initWithFrame:view.frame splitViews:2];
-    TUISplitView *splitView = [[TUISplitView alloc] initWithFrame:view.frame];
-	[splitView setAutoresizingMask:(TUIViewAutoresizingFlexibleSize)];
+    TUISplitView *splitView = [[TUISplitView alloc] initWithFrame:view.frame andSubviews:3];
+	splitView.backgroundColor = [NSColor orangeColor];
+
     splitView.vertical = YES;
     view.rootView = splitView;
     
-    TUIView *view1 = [[TUIView alloc] initWithFrame:CGRectZero];
+    RBSplitSubview *view1 = [[RBSplitSubview alloc] initWithFrame:CGRectZero];
     view1.backgroundColor = [NSColor redColor];
-#warning horizontal resizing might be off
     
-    TUIView *view2 = [[TUIView alloc] initWithFrame:CGRectZero];
+    RBSplitSubview *view2 = [[RBSplitSubview alloc] initWithFrame:CGRectZero];
     view2.backgroundColor = [NSColor blueColor];
     
-    TUIView *view3 = [[TUIView alloc] initWithFrame:CGRectZero];
+    RBSplitSubview *view3 = [[RBSplitSubview alloc] initWithFrame:CGRectZero];
     view3.backgroundColor = [NSColor magentaColor];
     
     [splitView addSubview:view1];
