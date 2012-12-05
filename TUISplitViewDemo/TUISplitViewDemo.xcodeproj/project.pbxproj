@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842A9B6F160ECFA700584899 /* TwUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842A9B68160ECFA200584899 /* TwUI.framework */; };
 		AB05E6D71561CC2A007FE920 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E6D61561CC2A007FE920 /* Cocoa.framework */; };
 		AB05E6E11561CC2A007FE920 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB05E6DF1561CC2A007FE920 /* InfoPlist.strings */; };
 		AB05E6E31561CC2A007FE920 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB05E6E21561CC2A007FE920 /* main.m */; };
@@ -16,34 +17,33 @@
 		AB05E6FE1561CD65007FE920 /* TUISplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB05E6FB1561CD65007FE920 /* TUISplitView.m */; };
 		AB05E7141561D09F007FE920 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E7131561D09F007FE920 /* ApplicationServices.framework */; };
 		AB05E7161561D0A4007FE920 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E7151561D0A4007FE920 /* QuartzCore.framework */; };
-		AB3306841589A5BC00BC74F5 /* TwUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB33067D1589A59A00BC74F5 /* TwUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AB33067C1589A59A00BC74F5 /* PBXContainerItemProxy */ = {
+		842A9B67160ECFA200584899 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB3306721589A59900BC74F5 /* TwUI.xcodeproj */;
+			containerPortal = 842A9B5B160ECFA100584899 /* TwUI.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CB5B264C13BE6DA200579B1E;
 			remoteInfo = TwUI;
 		};
-		AB33067E1589A59A00BC74F5 /* PBXContainerItemProxy */ = {
+		842A9B69160ECFA200584899 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB3306721589A59900BC74F5 /* TwUI.xcodeproj */;
+			containerPortal = 842A9B5B160ECFA100584899 /* TwUI.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CB5E321813BE7098004B7899;
 			remoteInfo = "Dynamic Library";
 		};
-		AB3306801589A59A00BC74F5 /* PBXContainerItemProxy */ = {
+		842A9B6B160ECFA200584899 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB3306721589A59900BC74F5 /* TwUI.xcodeproj */;
+			containerPortal = 842A9B5B160ECFA100584899 /* TwUI.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5EE983B713BE7809005F430D;
 			remoteInfo = "Static Library";
 		};
-		AB3306821589A59A00BC74F5 /* PBXContainerItemProxy */ = {
+		842A9B6D160ECFA200584899 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AB3306721589A59900BC74F5 /* TwUI.xcodeproj */;
+			containerPortal = 842A9B5B160ECFA100584899 /* TwUI.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = CB5B266113BE6DA300579B1E;
 			remoteInfo = Tests;
@@ -51,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		842A9B5B160ECFA100584899 /* TwUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TwUI.xcodeproj; path = twui/TwUI.xcodeproj; sourceTree = SOURCE_ROOT; };
 		AB05E6D21561CC2A007FE920 /* TUISplitViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TUISplitViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB05E6D61561CC2A007FE920 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AB05E6D91561CC2A007FE920 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -68,7 +69,6 @@
 		AB05E6FB1561CD65007FE920 /* TUISplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUISplitView.m; sourceTree = "<group>"; };
 		AB05E7131561D09F007FE920 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		AB05E7151561D0A4007FE920 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		AB3306721589A59900BC74F5 /* TwUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TwUI.xcodeproj; path = ../../externals/twui/TwUI.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +76,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842A9B6F160ECFA700584899 /* TwUI.framework in Frameworks */,
 				AB05E7161561D0A4007FE920 /* QuartzCore.framework in Frameworks */,
 				AB05E7141561D09F007FE920 /* ApplicationServices.framework in Frameworks */,
-				AB3306841589A5BC00BC74F5 /* TwUI.framework in Frameworks */,
 				AB05E6D71561CC2A007FE920 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +86,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		842A9B5C160ECFA100584899 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				842A9B68160ECFA200584899 /* TwUI.framework */,
+				842A9B6A160ECFA200584899 /* libtwui.dylib */,
+				842A9B6C160ECFA200584899 /* libtwui.a */,
+				842A9B6E160ECFA200584899 /* Tests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		AB05E6C71561CC2A007FE920 = {
 			isa = PBXGroup;
 			children = (
@@ -132,7 +143,6 @@
 				AB05E6EB1561CC2B007FE920 /* MainMenu.xib */,
 				AB05E6F71561CD65007FE920 /* TUISplitView */,
 				AB05E6DD1561CC2A007FE920 /* Supporting Files */,
-				AB3306721589A59900BC74F5 /* TwUI.xcodeproj */,
 			);
 			path = TUISplitViewDemo;
 			sourceTree = "<group>";
@@ -154,20 +164,10 @@
 			children = (
 				AB05E6FA1561CD65007FE920 /* TUISplitView.h */,
 				AB05E6FB1561CD65007FE920 /* TUISplitView.m */,
+				842A9B5B160ECFA100584899 /* TwUI.xcodeproj */,
 			);
 			name = TUISplitView;
 			path = ../../TUISplitView;
-			sourceTree = "<group>";
-		};
-		AB3306731589A59900BC74F5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AB33067D1589A59A00BC74F5 /* TwUI.framework */,
-				AB33067F1589A59A00BC74F5 /* libtwui.dylib */,
-				AB3306811589A59A00BC74F5 /* libtwui.a */,
-				AB3306831589A59A00BC74F5 /* Tests.octest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,7 +196,7 @@
 		AB05E6C91561CC2A007FE920 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Jonathan;
 			};
 			buildConfigurationList = AB05E6CC1561CC2A007FE920 /* Build configuration list for PBXProject "TUISplitViewDemo" */;
@@ -211,8 +211,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = AB3306731589A59900BC74F5 /* Products */;
-					ProjectRef = AB3306721589A59900BC74F5 /* TwUI.xcodeproj */;
+					ProductGroup = 842A9B5C160ECFA100584899 /* Products */;
+					ProjectRef = 842A9B5B160ECFA100584899 /* TwUI.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -223,32 +223,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		AB33067D1589A59A00BC74F5 /* TwUI.framework */ = {
+		842A9B68160ECFA200584899 /* TwUI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = TwUI.framework;
-			remoteRef = AB33067C1589A59A00BC74F5 /* PBXContainerItemProxy */;
+			remoteRef = 842A9B67160ECFA200584899 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB33067F1589A59A00BC74F5 /* libtwui.dylib */ = {
+		842A9B6A160ECFA200584899 /* libtwui.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
 			path = libtwui.dylib;
-			remoteRef = AB33067E1589A59A00BC74F5 /* PBXContainerItemProxy */;
+			remoteRef = 842A9B69160ECFA200584899 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB3306811589A59A00BC74F5 /* libtwui.a */ = {
+		842A9B6C160ECFA200584899 /* libtwui.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libtwui.a;
-			remoteRef = AB3306801589A59A00BC74F5 /* PBXContainerItemProxy */;
+			remoteRef = 842A9B6B160ECFA200584899 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AB3306831589A59A00BC74F5 /* Tests.octest */ = {
+		842A9B6E160ECFA200584899 /* Tests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = Tests.octest;
-			remoteRef = AB3306821589A59A00BC74F5 /* PBXContainerItemProxy */;
+			remoteRef = 842A9B6D160ECFA200584899 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -313,8 +313,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -342,8 +343,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -361,6 +363,7 @@
 		AB05E6F11561CC2B007FE920 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TUISplitViewDemo/TUISplitViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "TUISplitViewDemo/TUISplitViewDemo-Info.plist";
@@ -372,6 +375,7 @@
 		AB05E6F21561CC2B007FE920 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TUISplitViewDemo/TUISplitViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "TUISplitViewDemo/TUISplitViewDemo-Info.plist";
