@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		842A9B6F160ECFA700584899 /* TwUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842A9B68160ECFA200584899 /* TwUI.framework */; };
-		842A9B80160F7B5600584899 /* TUISplitSubview.m in Sources */ = {isa = PBXBuildFile; fileRef = 842A9B7F160F7B5600584899 /* TUISplitSubview.m */; };
 		AB05E6D71561CC2A007FE920 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB05E6D61561CC2A007FE920 /* Cocoa.framework */; };
 		AB05E6E11561CC2A007FE920 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB05E6DF1561CC2A007FE920 /* InfoPlist.strings */; };
 		AB05E6E31561CC2A007FE920 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB05E6E21561CC2A007FE920 /* main.m */; };
@@ -53,9 +52,6 @@
 
 /* Begin PBXFileReference section */
 		842A9B5B160ECFA100584899 /* TwUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TwUI.xcodeproj; path = twui/TwUI.xcodeproj; sourceTree = SOURCE_ROOT; };
-		842A9B7E160F7B5500584899 /* TUISplitSubview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUISplitSubview.h; sourceTree = "<group>"; };
-		842A9B7F160F7B5600584899 /* TUISplitSubview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUISplitSubview.m; sourceTree = "<group>"; };
-		842A9B81160F7BAB00584899 /* RBSplitViewPrivateDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBSplitViewPrivateDefines.h; sourceTree = "<group>"; };
 		AB05E6D21561CC2A007FE920 /* TUISplitViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TUISplitViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB05E6D61561CC2A007FE920 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AB05E6D91561CC2A007FE920 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -166,9 +162,6 @@
 		AB05E6F71561CD65007FE920 /* TUISplitView */ = {
 			isa = PBXGroup;
 			children = (
-				842A9B81160F7BAB00584899 /* RBSplitViewPrivateDefines.h */,
-				842A9B7E160F7B5500584899 /* TUISplitSubview.h */,
-				842A9B7F160F7B5600584899 /* TUISplitSubview.m */,
 				AB05E6FA1561CD65007FE920 /* TUISplitView.h */,
 				AB05E6FB1561CD65007FE920 /* TUISplitView.m */,
 				842A9B5B160ECFA100584899 /* TwUI.xcodeproj */,
@@ -203,7 +196,7 @@
 		AB05E6C91561CC2A007FE920 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Jonathan;
 			};
 			buildConfigurationList = AB05E6CC1561CC2A007FE920 /* Build configuration list for PBXProject "TUISplitViewDemo" */;
@@ -281,7 +274,6 @@
 				AB05E6E31561CC2A007FE920 /* main.m in Sources */,
 				AB05E6EA1561CC2A007FE920 /* AppDelegate.m in Sources */,
 				AB05E6FE1561CD65007FE920 /* TUISplitView.m in Sources */,
-				842A9B80160F7B5600584899 /* TUISplitSubview.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,8 +313,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -350,8 +343,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;

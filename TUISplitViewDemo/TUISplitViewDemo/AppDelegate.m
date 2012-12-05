@@ -10,21 +10,20 @@
     
     //TUISplitView *splitView = [[TUISplitView alloc] initWithFrame:view.frame splitViews:2];
     TUISplitView *splitView = [[TUISplitView alloc] initWithFrame:view.frame];
-	[splitView setDelegate:self];
 	
     splitView.vertical = YES;
     view.rootView = splitView;
     
-    TUISplitSubview *view1 = [[TUISplitSubview alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
+    TUIView *view1 = [[TUIView alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
     view1.drawRect = ^(TUIView *view, CGRect rect) {
 		NSGradient *gradient = [[NSGradient alloc]initWithColors:@[[NSColor redColor], [NSColor purpleColor]]];
 		[gradient drawInRect:rect angle:90.0f];
 	};
     
-    TUISplitSubview *view2 = [[TUISplitSubview alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
+    TUIView *view2 = [[TUIView alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
     view2.backgroundColor = [NSColor blueColor];
     
-    TUISplitSubview *view3 = [[TUISplitSubview alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
+    TUIView *view3 = [[TUIView alloc] initWithFrame:CGRectMake(0, 0, 320, NSHeight(view.frame))];
     view3.backgroundColor = [NSColor magentaColor];
     
     [splitView addSubview:view1];
@@ -120,20 +119,6 @@
 - (void)applicationWillTerminate:(NSNotification *)notification {
     //[self saveState];
 }
-
-// This collapses/expands the first subview with animation and resizing when double-clicking.
-- (BOOL)splitView:(TUISplitView*)sender shouldHandleEvent:(NSEvent*)theEvent inDivider:(NSUInteger)divider betweenView:(TUISplitSubview*)leading andView:(TUISplitSubview*)trailing {
-	if (([theEvent clickCount]>1)) {
-		if ([leading isCollapsed]) {
-			[leading expandWithAnimation:YES withResize:YES];
-		} else {
-			[leading collapseWithAnimation:YES withResize:YES];
-		}
-		return NO;
-	}
-	return YES;
-}
-
 
 
 @end

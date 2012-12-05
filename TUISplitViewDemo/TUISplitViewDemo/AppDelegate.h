@@ -4,5 +4,5 @@
 
 @property (weak) IBOutlet NSWindow *window;
 
-
+NSSplitView
 @end
